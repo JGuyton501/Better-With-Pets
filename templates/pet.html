@@ -82,7 +82,7 @@
 					<h5>Are you fit to bring {{pet.name}} home?</h5>
 					<p>Adoption Fee: $195</p>
 					<p>Please fill out the following information and someone from {{pet.location}} will contact you regarding next steps. Feel free to contact us at (314) 555-5555 with any questions!</p>
-					<form method="post" action="/new_user">
+					<form method="post" action="/new_proposal">
 		                    <p><strong>Your information:</strong></p>
 		                    <div class="row">
 		                        <div class="input-field col s6">
@@ -106,7 +106,7 @@
 		                    </div>
 		                    <div class="row">
 								<div class="input-field col s4">
-									<select name="previoe_owner" id='previoe_owner'>
+									<select name="previous_owner" id='previous_owner'>
 										<option value="no">No</option>
 										<option value="yes">Yes</option>
 									</select>
@@ -133,23 +133,30 @@
 									</select>
 									<label>Do you have any other pets?</label>
 								</div>
-								<div class="input-field col s8 other_pet_list hide">
-		                            <input id="other_pet_list" name="other_pet_list" type="text" class="validate">
-		                            <label for="other_pet_list">Please list other pets:</label>
+								<div class="input-field col s8 other_pets_list hide">
+		                            <input id="other_pets_list" name="other_pets_list" type="text" class="validate">
+		                            <label for="other_pets_list">Please list other pets:</label>
 		                        </div>
 		                    </div>
 		                    <div class="row">
 		                    	<div class="col s12">
 		                    		<p>Why do you want to adopt {{pet.name}}?</p>
-		                    		<textarea id="why_adopt" class="materialize-textarea"></textarea>
+		                    		<textarea id="why_adopt" name="why_adopt" class="materialize-textarea"></textarea>
 		                    	</div>
 		                    </div>
 		                    <div class="row">
 		                    	<div class="col s12">
 		                    		<p>Notes:</p>
-		                    		<textarea id="notes" class="materialize-textarea"></textarea>
+		                    		<textarea id="notes" name="notes" class="materialize-textarea"></textarea>
 		                    	</div>
 		                    </div>
+		                    <div class="input-field col s12 hide">
+	                            <input id="pet_name" name="pet_name" type="text" class="validate" value="{{pet.name}}" disabled>
+	                            <input id="pet_color" name="pet_color" type="text" class="validate" value="{{pet.color}}" disabled>
+	                            <input id="pet_age" name="pet_age" type="text" class="validate" value="{{pet.age}}" disabled>
+	                            <input id="pet_picture" name="pet_picture" type="text" class="validate" value="{{pet.picture}}" disabled>
+	                        </div>
+
 		                <div class="card-action right-align">
 		                    <input type="submit" class="btn waves-effect waves-light blue darken-3" value="Submit">
 		                </div>
@@ -196,10 +203,10 @@
     var e = document.getElementById("other_pets");
     var value = e.options[e.selectedIndex].value;
     if(value === "yes") {
-      $(".other_pet_list").removeClass("hide");
+      $(".other_pets_list").removeClass("hide");
     }
     else{
-      $(".other_pet_list").addClass("hide");
+      $(".other_pets_list").addClass("hide");
     }
   });
 

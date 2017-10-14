@@ -76,8 +76,33 @@ def new_user():
     db.session.commit()
     return redirect('/')
 
+# post new proposal
+@app.route('/new_proposal', methods=['POST'])
+def new_proposal():
+	print (request.form['first_name'],request.form['last_name'],request.form['email'],request.form['phone'],request.form['previous_owner'],request.form['first_time_adopt'],request.form['pet_safe'],request.form['other_pets'],request.form['other_pets_list'],request.form['why_adopt'],request.form['notes'],request.form['pet_name'],request.form['pet_color'],request.form['pet_age'],request.form['pet_picture'])
+	proposal = modules.Pet_Adopt(
+        request.form['first_name'],
+        request.form['last_name'],
+        request.form['email'],
+        request.form['phone'],
+        request.form['previous_owner'],
+        request.form['first_time_adopt'],
+        request.form['pet_safe'],
+        request.form['other_pets'],
+        request.form['other_pets_list'],
+        request.form['why_adopt'],
+        request.form['notes'],
+        request.form['pet_name'],
+        request.form['pet_color'],
+        request.form['pet_age'],
+        request.form['pet_picture']
+        )
+	db.session.add(proposal)
+	db.session.commit()
+	return redirect('/main')
 
-##########################
+
+##########################CLASSES################
 # adding park
 class Parks(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -142,6 +167,61 @@ class Pet_Profile(db.Model):
 
     def __repr__(self):
         return '<Park id %r>' % self.id
+
+class Pet_Adopt(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(20))
+    last_name = db.Column(db.String(20))
+    email = db.Column(db.String(75))
+    phone = db.Column(db.String(15))
+    previous_owner = db.Column(db.String(15))
+    first_time_adopt = db.Column(db.String(5))
+    pet_safe = db.Column(db.String(5))
+    other_pets = db.Column(db.String(5))
+    other_pets_list = db.Column(db.String(200))
+    why_adopt = db.Column(db.String(1000))
+    notes = db.Column(db.String(1000))
+    pet_name = db.Column(db.String(50))
+    pet_color = db.Column(db.String(15))
+    pet_age = db.Column(db.String(15))
+    pet_picture = db.Column(db.String(250))
+
+    def __init__(
+    	self, 
+    	first_name, 
+    	last_name, 
+    	email, 
+    	phone, 
+    	previous_owner, 
+    	first_time_adopt, 
+    	pet_safe, 
+    	other_pets, 
+    	other_pets_list, 
+    	why_adopt, 
+    	notes,
+    	pet_name,
+    	pet_color,
+    	pet_age,
+    	pet_picture
+    ):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.phone = phone
+        self.previous_owner = previous_owner
+        self.first_time_adopt = first_time_adopt
+        self.pet_safe = pet_safe
+        self.other_pets = other_pets
+        self.other_pets_list = other_pets_list
+        self.why_adopt = why_adopt
+        self.notes = notes
+        self.pet_name = pet_name
+        self.pet_color = pet_color
+        self.pet_age = pet_age
+        self.pet_picture = pet_picture
+
+    def __repr__(self):
+        return '<Proposal id %r>' % self.id
 
 
 # #LOGIN
