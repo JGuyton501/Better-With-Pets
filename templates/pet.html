@@ -57,6 +57,10 @@
 	.facts {
 		padding-right: 5%;
 	}
+	.p-caption{
+		position: relative;
+		top: -15%;
+	}
 
 
 </style>
@@ -77,11 +81,11 @@
 			<div id="fun" class="col s12 pet row">
 				{% for pic in pics %}
 					<div class="col s3 pet-ind">
-						<img class="materialboxed pet-pic" data-caption="{{pic.caption}}" src="{{pic.picture}}">
-							<div class="pet-pic-item" id="pet-pic-item-{{pic.id}}">
-								<a href="#" onclick="updateLikes({{pic.id}}); return false;"><span class="label" id="pet-pic-likes-{{pic.id}}">{{pic.likes}}</span></a>
-							</div>
-						<p>{{pic.caption}}</p>
+						<img class="materialboxed pet-pic" data-caption="{{pic.caption}}" src="{{pic.picture}}" />
+						<div class="pet-pic-item" id="pet-pic-item-{{pic.id}}">
+							<a href="#" onclick="updateLikes({{pic.id}}); return false;"><span class="label" id="pet-pic-likes-{{pic.id}}">{{pic.likes}}</span></a>
+						</div>
+						<p class="p-caption">{{pic.caption}}</p>
 					</div>
 				{% endfor %}
 			</div>
@@ -103,14 +107,15 @@
 		$("#pet-pic-likes-"+id).text(curr_likes);
 
 		$.ajax({
-            url: '/updatePicLikes/' + curr_likes,
+            url: '/updatePicLikes/' + String(id) + "/"+ String(curr_likes),
             type: 'POST',
             success: function(response) {
                 console.log(response);
             },
             error: function(error) {
                 console.log(error);
-            }
+            },
+            
         });
 
 	}

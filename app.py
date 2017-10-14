@@ -45,8 +45,15 @@ def adopt():
 @app.route('/pet/<petname>')
 def pet(petname):
 	pet = Pets.query.filter_by(name=petname).first()
-	pics = Pet_Profile.query.filter_by(name=petname).all()
+	pics = Pet_Profile.query.filter_by(name=petname).order_by("id asc").all()
 	return render_template('pet.html', pet = pet, pics = pics)
+
+@app.route('/updatePicLikes/<picID>/<likes>', methods=['POST'])
+def updatePicLikes(picID, likes):
+	pic = Pet_Profile.query.filter_by(id=picID).first()
+	pic.likes = likes
+	db.session.commit()
+	return "Like Success"
 
 # modules below
 # post new user
@@ -149,4 +156,5 @@ class Pet_Profile(db.Model):
 
 
 if __name__ == '__main__': 
+	app.debug = True
 	app.run()
