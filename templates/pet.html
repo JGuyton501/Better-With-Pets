@@ -32,6 +32,17 @@
 	.pet{
 		padding-top: 25px;
 	}
+	.pet-pic{
+		width: 100%;
+		height: 200px;
+		border-radius: 10%;
+	}
+	.pet-ind{
+		height: 300px;
+		/*border-color: #616161;
+		border-style: solid;
+		border-width: 0px .5px 0px 0px;*/
+	}
 
 </style>
 </head>
@@ -48,14 +59,15 @@
 				<li class="tab col s6"><a class="active" href="#fun">Fun</a></li>
 				<li class="tab col s6"><a href="#about">About Me</a></li>
 			</ul>
-			<div id="fun" class="col s12 pet">
+			<div id="fun" class="col s12 pet row">
 				{% for pic in pics %}
-					<img src="{{pic.picture}}">
-					<p>{{pic.caption}}</p>
+					<div class="col s3 pet-ind">
+						<img class="materialboxed pet-pic" data-caption="{{pic.caption}}" src="{{pic.picture}}">
+						<p>{{pic.caption}}</p>
+					</div>
 				{% endfor %}
 			</div>
 			<div id="about" class="col s12 pet">
-				<h5>About Me:</h5>
 				{{pet.description}}
 
 				<h5>Fun Facts:</h5>
