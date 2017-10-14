@@ -37,6 +37,10 @@ def social():
 def lost_pet():
     return render_template('lost-pet.html')
 
+@app.route('/adopt')
+def adopt():
+    return render_template('adopt.html')
+
 
 # modules below
 # post new user
