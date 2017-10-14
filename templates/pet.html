@@ -43,6 +43,19 @@
 		border-style: solid;
 		border-width: 0px .5px 0px 0px;*/
 	}
+	.pet-pic-item {
+		width: 20px;
+		height: 20px;
+		background-image: url('../static/images/map-paw.png');
+		position: relative;
+		top: -50px;
+   		left: 210px;
+	}
+	.label {
+		position: relative;
+		top: 20px;
+	}
+
 
 </style>
 </head>
@@ -63,6 +76,9 @@
 				{% for pic in pics %}
 					<div class="col s3 pet-ind">
 						<img class="materialboxed pet-pic" data-caption="{{pic.caption}}" src="{{pic.picture}}">
+							<div class="pet-pic-item" id="pet-pic-item">
+								<span class="label">{{pic.likes}}</span>
+							</div>
 						<p>{{pic.caption}}</p>
 					</div>
 				{% endfor %}
