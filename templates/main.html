@@ -5,16 +5,44 @@
   <title>BWP Hack Home</title>
   {% include 'nav.html' %}
 
-  <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="../static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="../static/css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <style>
+      #map {
+        height: 450px;
+        width: 117%;
+       }
+    </style>
 </head>
 <body>
     <div class="container">
       <div id="map"></div>
-      <div id="pet-parks">
-        Blah
+      <div id="pet-parks" class="row" style="padding-left: 5%;">
+        
+        <h5 class="center">Parks in the area</h5>
+
+        {% for park in parks %}
+          <div class="col s4">
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src="{{park.picture}}" width="280" height="140">
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">
+                  {{park.name}}<i class="material-icons right">more_vert</i>
+                </span>
+                <p>{{park.phone}}</p>
+                <p>{{park.rating}}</p>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">
+                  {{park.name}}<i class="material-icons right">close</i>
+                </span>
+                <p>{{park.description}}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
       </div>
     </div>
 </body>
@@ -26,7 +54,7 @@
 
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 8,
+            zoom: 10,
             center: {
                 lat: 38.627,
                 lng: -90.1994
@@ -37,8 +65,8 @@
               url: 'https://maps.googleapis.com/maps/api/geocode/json?address={{park.address}}&key=AIzaSyAkOfmfi84Tve-8Q6VW7OmIDfRT-kiVq_0',
               type: 'get',
               success: function () {
-                  lat = i{{park.id}}.responseJSON.results[0].geometry.location.lat;
-                  long = i{{park.id}}.responseJSON.results[0].geometry.location.lng;
+                  lat = i{{park.id}}.responseJSON.results[0]["geometry"]["location"]["lat"];
+                  long = i{{park.id}}.responseJSON.results[0]["geometry"]["location"]["lng"];
                   var marker = new google.maps.Marker({
                       position: {
                           lat: parseFloat(lat),
@@ -66,7 +94,6 @@
         {% endfor %}
         var markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-     
     }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkOfmfi84Tve-8Q6VW7OmIDfRT-kiVq_0&callback=initMap">
