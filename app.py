@@ -39,7 +39,8 @@ def lost_pet():
 
 @app.route('/adopt')
 def adopt():
-    return render_template('adopt.html')
+	pets = Pets.query.all()
+	return render_template('adopt.html', pets = pets)
 
 
 # modules below
@@ -71,7 +72,7 @@ class Parks(db.Model):
     rating = db.Column(db.String(300))
     description = db.Column(db.String(1000))
 
-    def __init__(self, type_of_shelter, name, address, phone, picture, rating, description):
+    def __init__(self, type_of_park, name, address, phone, picture, rating, description):
         self.type_of_park = type_of_park
         self.name = name
         self.address = address
@@ -82,6 +83,33 @@ class Parks(db.Model):
 
     def __repr__(self):
         return '<Park number %r>' % self.phone
+
+class Pets(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type_of_pet = db.Column(db.String(20))
+    name = db.Column(db.String(50))
+    breed = db.Column(db.String(50))
+    age = db.Column(db.String(15))
+    picture = db.Column(db.String(300))
+    size = db.Column(db.String(15))
+    color = db.Column(db.String(15))
+    description = db.Column(db.String(1000))
+    location = db.Column(db.String(100))
+
+    def __init__(self, type_of_pet, name, breed, age, picture, size, color, description, location):
+        self.type_of_pet = type_of_pet
+        self.name = name
+        self.breed = breed
+        self.age = age
+        self.picture = picture
+        self.size = size
+        self.color = color
+        self.description = description
+        self.location = location
+
+    def __repr__(self):
+        return '<Pet %r>' % self.name
+
 
 # #LOGIN
 # @app.route('/post_login', methods=['POST'])

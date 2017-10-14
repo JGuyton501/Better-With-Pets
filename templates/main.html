@@ -81,7 +81,7 @@
                   });
                   markers.push(marker); //push back into markers array
 
-                  var contentString = '<p>{{park.name}}</p> <p>{{park.address}}</p> <p>{{park.phone}}</p><p>{{park.description}}</p>';
+                  var contentString = '<h5>{{park.name}}</h5> <address>{{park.address}}</address> <p>Phone: {{park.phone}}</p><p>Description: {{park.description}}</p>';
 
                     var infowindow = new google.maps.InfoWindow({
                       content: contentString
