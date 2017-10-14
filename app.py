@@ -42,6 +42,11 @@ def adopt():
 	pets = Pets.query.all()
 	return render_template('adopt.html', pets = pets)
 
+@app.route('/admin-main')
+def admin_main():
+	pets = Pets.query.all()
+	return render_template('admin-main.html', pets = pets)
+
 @app.route('/pet/<petname>')
 def pet(petname):
 	pet = Pets.query.filter_by(name=petname).first()
