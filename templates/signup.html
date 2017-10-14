@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'link.html' %}
+
+    <title>Sign Up</title>
+</head>
+
+<body>
+    <div class="valign-wrapper row login-box">
+        <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+            <!-- <form method="post" action="/post_login"> -->
+            <form method="post" action="/new_user">
+                <div class="card-content">
+                    <img src="../../static/images/paw.png" height="100px" width="150px" >
+                    <span class="card-title">Sign Up</span>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="first_name" name="first_name" type="text" class="validate">
+                            <label for="first_name">First Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" name="last_name" type="text" class="validate">
+                            <label for="last_name">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="email" name="email" type="email" class="validate">
+                            <label for="email">Email Address</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="password" name="password" type="password" class="validate">
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                          <select name="pet_owner" id='pet_owner'>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                          </select>
+                          <label>Pet Owner</label>
+                         </div>
+                    </div>
+                </div>
+                <div class="card-action right-align">
+                    <input type="submit" class="btn waves-effect waves-light blue darken-3" value="Sign Up">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('select').material_select();
+});
+</script>
+
+</html>

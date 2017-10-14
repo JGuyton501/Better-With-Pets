@@ -1,0 +1,17 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.bg {
+    background-image: linear-gradient( rgba(0,0,0,.5), rgba(0,0,0,.7) ), url("../images/land.jpeg");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.home {
+	padding-top: 20%;
+	color: white;
+}
