@@ -9,8 +9,8 @@ db = SQLAlchemy(app)
 import modules
 
 # PostgreSQL for Heroku
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres@localhost/bwphack'
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres@localhost/bwphack'
 
 @app.route('/')
 def home():
@@ -42,6 +42,10 @@ def adopt():
 	pets = Pets.query.all()
 	return render_template('adopt.html', pets = pets)
 
+@app.route('/pet/<petname>')
+def pet(petname):
+	pet = Pets.query.filter_by(name=petname).first()
+	return render_template('pet.html', pet = pet)
 
 # modules below
 # post new user
