@@ -61,8 +61,10 @@
 		position: relative;
 		top: -15%;
 	}
-
-
+	#adopt{
+		background-image: url('../static/images/map-paw.png');
+		background-size: 45px 35px;
+	}
 </style>
 </head>
 <body>
@@ -72,7 +74,90 @@
     <div class="container">
       <img src="../static/images/{{pet.picture}}" class="pet-avi">
       <div class="pet-info">
-	      <h4 class="woof">Hi! I'm {{pet.name}}</h4>
+	      <div class="woof">
+		      <h4>Hi! I'm {{pet.name}}</h4>
+		      <a class="waves-effect waves-light btn blue darken-3 modal-trigger" href="#modal1"" id="adopt">Adopt Me</a>
+			  <div id="modal1" class="modal">
+				  <div class="modal-content">
+					<h5>Are you fit to bring {{pet.name}} home?</h5>
+					<p>Adoption Fee: $195</p>
+					<p>Please fill out the following information and someone from {{pet.location}} will contact you regarding next steps. Feel free to contact us at (314) 555-5555 with any questions!</p>
+					<form method="post" action="/new_user">
+		                    <p><strong>Your information:</strong></p>
+		                    <div class="row">
+		                        <div class="input-field col s6">
+		                            <input id="first_name" name="first_name" type="text" class="validate">
+		                            <label for="first_name">First Name</label>
+		                        </div>
+		                        <div class="input-field col s6">
+		                            <input id="last_name" name="last_name" type="text" class="validate">
+		                            <label for="last_name">Last Name</label>
+		                        </div>
+		                    </div>
+		                    <div class="row">
+		                        <div class="input-field col s6">
+		                            <input id="email" name="email" type="email" class="validate">
+		                            <label for="email">Email Address</label>
+		                        </div>
+		                        <div class="input-field col s6">
+		                            <input id="phone" name="phone" type="text" class="validate">
+		                            <label for="phone">Phone Number</label>
+		                        </div>
+		                    </div>
+		                    <div class="row">
+								<div class="input-field col s4">
+									<select name="previoe_owner" id='previoe_owner'>
+										<option value="no">No</option>
+										<option value="yes">Yes</option>
+									</select>
+									<label>Have you every owned a pet?</label>
+								</div>
+								<div class="input-field col s4">
+									<select name="first_time_adopt" id='first_time_adopt'>
+										<option value="no">No</option>
+										<option value="yes">Yes</option>
+									</select>
+									<label>Have you adopted a pet in the past?</label>
+								</div>
+								<div class="input-field col s4">
+									<select name="pet_safe" id='pet_safe'>
+										<option value="no">No</option>
+										<option value="yes">Yes</option>
+									</select>
+									<label>Do you have a pet safe home?</label>
+								</div>
+								<div class="input-field col s4">
+									<select name="other_pets" id='other_pets'>
+										<option value="no">No</option>
+										<option value="yes">Yes</option>
+									</select>
+									<label>Do you have any other pets?</label>
+								</div>
+								<div class="input-field col s8 other_pet_list hide">
+		                            <input id="other_pet_list" name="other_pet_list" type="text" class="validate">
+		                            <label for="other_pet_list">Please list other pets:</label>
+		                        </div>
+		                    </div>
+		                    <div class="row">
+		                    	<div class="col s12">
+		                    		<p>Why do you want to adopt {{pet.name}}?</p>
+		                    		<textarea id="why_adopt" class="materialize-textarea"></textarea>
+		                    	</div>
+		                    </div>
+		                    <div class="row">
+		                    	<div class="col s12">
+		                    		<p>Notes:</p>
+		                    		<textarea id="notes" class="materialize-textarea"></textarea>
+		                    	</div>
+		                    </div>
+		                <div class="card-action right-align">
+		                    <input type="submit" class="btn waves-effect waves-light blue darken-3" value="Submit">
+		                </div>
+		            </form>
+
+				  </div>
+			  </div>
+		  </div>
 	      <div class="profile col s12">
 			<ul class="tabs">
 				<li class="tab col s6"><a class="active" href="#fun">Fun</a></li>
@@ -102,6 +187,25 @@
     </div>
 </body>
 <script type="text/javascript">
+	$(document).ready(function(){
+	// the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+	$('.modal').modal();
+	$('select').material_select();
+
+	$("#other_pets").on("change", function() {
+    var e = document.getElementById("other_pets");
+    var value = e.options[e.selectedIndex].value;
+    if(value === "yes") {
+      $(".other_pet_list").removeClass("hide");
+    }
+    else{
+      $(".other_pet_list").addClass("hide");
+    }
+  });
+
+
+	});
+      
 	function updateLikes(id){
 		var curr_likes = parseInt($("#pet-pic-likes-"+id).text()) + 1;
 		$("#pet-pic-likes-"+id).text(curr_likes);
