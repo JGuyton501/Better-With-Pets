@@ -16,6 +16,9 @@ body, html {
 	color: white;
 }
 .card-title{
-	font-size: 15px !important;
+	font-size: 20px !important;
 	line-height: 20px !important;
+}
+.card{
+	height: 350px;
 }

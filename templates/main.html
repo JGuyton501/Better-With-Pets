@@ -16,7 +16,7 @@
 <body>
     <div class="container">
       <div id="map"></div>
-      <div id="pet-parks" class="row" style="padding-left: 5%;">
+      <div id="pet-parks" class="row col s12" style="padding-left: 10%; overflow-x: auto;">
         
         <h5 class="center">Parks in the area</h5>
 
@@ -30,14 +30,18 @@
                 <span class="card-title activator grey-text text-darken-4">
                   {{park.name}}<i class="material-icons right">more_vert</i>
                 </span>
-                <p>{{park.phone}}</p>
-                <p>{{park.rating}}</p>
+                <p>{{park.address}}</p>
+                <br/>
+                {% for r in range(park.rating|int) %}
+                  <i class="material-icons #c62828 red-text text-darken-2">favorite</i>
+                {% endfor %}
               </div>
               <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">
                   {{park.name}}<i class="material-icons right">close</i>
                 </span>
-                <p>{{park.description}}</p>
+                <p>Phone: {{park.phone}}</p>
+                <p>Description: {{park.description}}</p>
               </div>
             </div>
           </div>
