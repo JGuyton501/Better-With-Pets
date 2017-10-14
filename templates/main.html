@@ -12,7 +12,64 @@
 </head>
 <body>
     <div class="container">
-      ljk
+      <div id="map"></div>
+      <div id="pet-parks">
+        Blah
+      </div>
     </div>
 </body>
+<script>
+    var lat;
+    var long;
+    var markers = [];
+    var infoWindows = [];
+
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            center: {
+                lat: 38.627,
+                lng: -90.1994
+            }
+        });
+        {% for park in parks %}
+          var i{{park.id}} = $.ajax({
+              url: 'https://maps.googleapis.com/maps/api/geocode/json?address={{park.address}}&key=AIzaSyAkOfmfi84Tve-8Q6VW7OmIDfRT-kiVq_0',
+              type: 'get',
+              success: function () {
+                  lat = i{{park.id}}.responseJSON.results[0].geometry.location.lat;
+                  long = i{{park.id}}.responseJSON.results[0].geometry.location.lng;
+                  var marker = new google.maps.Marker({
+                      position: {
+                          lat: parseFloat(lat),
+                          lng: parseFloat(long)
+                      },
+                      map: map
+                  });
+                  markers.push(marker); //push back into markers array
+
+                  var contentString = '<p>{{park.name}}</p> <p>{{park.address}}</p> <p>{{park.phone}}</p><p>{{park.description}}</p>';
+
+                    var infowindow = new google.maps.InfoWindow({
+                      content: contentString
+                    });
+                    infoWindows.push(infowindow); //push back into infoWindows array
+
+                    marker.addListener('click', function () {
+                      infoWindows[{{loop.index0}}].open(map, markers[{{loop.index0}}]);
+                    });
+                    map.addListener('click', function () {
+                      infoWindows[{{loop.index0}}].close(map, markers[{{loop.index0}}]);
+                    });
+              }
+          });
+        {% endfor %}
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+     
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkOfmfi84Tve-8Q6VW7OmIDfRT-kiVq_0&callback=initMap">
+</script>
+
 </html>
