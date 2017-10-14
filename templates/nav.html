@@ -1,66 +1,13 @@
-<style type="text/css">
-    header,
-    main,
-    footer,
-    nav,
-    body {
-        padding-left: 150px;
-    }
-    
-    @media only screen and (max-width: 992px) {
-        header,
-        main,
-        footer,
-        nav,
-        body {
-            padding-left: 0;
-        }
-    }
-    
-    .container {
-        margin: 0 auto;
-        max-width: 1280px;
-        width: 80%;
-        padding-right: 0px !important;
-    }
-    
-    @media only screen and (min-width: 601px) {
-        .container {
-            width: 75%;
-        }
-    }
-    
-    @media only screen and (min-width: 993px) {
-        .container {
-        }
-        a.button-collapse {
-            display: none;
-        }
-    }
-</style>
+<nav class="#616161 grey darken-2">
+    <div class="nav-wrapper">
+        <a href="/main" class="brand-logo" style="padding-top: 10px;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Purina-logo.svg/2000px-Purina-logo.svg.png" width="200" height="auto"></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/main">Home</a></li>
+            <li><a href="/social">Social</a></li>
+            <li><a href="/adopt">Adopt</a></li>
+            <li><a href="/lost-pet">Lost pets</a></li>
+        </ul>
+    </div>
+</nav>
 
 
-<ul id="slide-out" class="side-nav fixed">
-    <li>
-        <div class="userView">
-            <div class="background">
-                <img src="https://source.unsplash.com/weekly?pet">
-            </div>
-            <a href="#!user"><img class="circle" src="https://source.unsplash.com/category/people"></a>
-            <a href="#!name"><span class="white-text name">Jon Doe</span></a>
-            <a href="#!email"><span class="white-text email">jondoe@gmail.com</span></a>
-        </div>
-    </li>
-    <li><a href="/main"><i class="material-icons">dashboard</i>Dog Parks</a></li>
-    <li><a href="/social"><i class="material-icons">today</i>Social</a></li>
-    <li><a href="/lost-pet"><i class="material-icons">question_answer</i>Lost pets</a></li>
-    <!--     <li><a href="#!"><i class="material-icons">chat</i>Messages</a></li>-->
-    
-</ul>
-<script type="text/javascript">
-    $('.button-collapse').sideNav({
-        menuWidth: 150, // Default is 300
-        edge: 'left', // Choose the horizontal origin
-        draggable: true // Choose whether you can drag to open on touch screens
-    });
-</script>
