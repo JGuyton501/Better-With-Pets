@@ -1,0 +1,7 @@
+{
+  "name": "BWP Hack",
+  "description": "Better With Pets Hackathon",
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ]
+}
