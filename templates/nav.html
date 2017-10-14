@@ -1,0 +1,69 @@
+<style type="text/css">
+    header,
+    main,
+    footer,
+    nav,
+    body {
+        padding-left: 150px;
+    }
+    
+    @media only screen and (max-width: 992px) {
+        header,
+        main,
+        footer,
+        nav,
+        body {
+            padding-left: 0;
+        }
+    }
+    
+    .container {
+        margin: 0 auto;
+        max-width: 1280px;
+        width: 85%;
+    }
+    
+    @media only screen and (min-width: 601px) {
+        .container {
+            width: 85%;
+        }
+    }
+    
+    @media only screen and (min-width: 993px) {
+        .container {
+            width: 90%;
+        }
+        a.button-collapse {
+            display: none;
+        }
+    }
+</style>
+
+<nav class="N/A transparent">
+   
+</nav>
+
+<ul id="slide-out" class="side-nav fixed">
+    <li>
+        <div class="userView">
+            <div class="background">
+                <img src="https://source.unsplash.com/weekly?pet">
+            </div>
+            <a href="#!user"><img class="circle" src="https://source.unsplash.com/category/people"></a>
+            <a href="#!name"><span class="white-text name">Jon Doe</span></a>
+            <a href="#!email"><span class="white-text email">jondoe@gmail.com</span></a>
+        </div>
+    </li>
+    <li><a href="/main"><i class="material-icons">dashboard</i>Dog Parks</a></li>
+    <li><a href="/social"><i class="material-icons">today</i>Social</a></li>
+    <li><a href="/lost-pet"><i class="material-icons">question_answer</i>Lost pets</a></li>
+    <!--     <li><a href="#!"><i class="material-icons">chat</i>Messages</a></li>-->
+    
+</ul>
+<script type="text/javascript">
+    $('.button-collapse').sideNav({
+        menuWidth: 150, // Default is 300
+        edge: 'left', // Choose the horizontal origin
+        draggable: true // Choose whether you can drag to open on touch screens
+    });
+</script>
