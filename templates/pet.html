@@ -21,7 +21,7 @@
 		border-radius: 50%
 	}
 	.pet-info .woof{
-		padding-left: 15%;
+		padding-left: 20%;
 	}
 	.tabs .tab a, .tabs .tab a:hover, .tabs .tab a.active{
 		color: black;
@@ -36,7 +36,9 @@
 </style>
 </head>
 <body>
-	<img src="https://static1.squarespace.com/static/52f5256ce4b039b51c0e643f/t/5821119ce3df285de6f31f4e/1478562205671/Pet-health-care-banner-1.jpg?format=1500w" class="pet-cover">
+<!-- 	<img src="https://static1.squarespace.com/static/52f5256ce4b039b51c0e643f/t/5821119ce3df285de6f31f4e/1478562205671/Pet-health-care-banner-1.jpg?format=1500w" class="pet-cover"> -->	
+		<img src="https://thumbs.dreamstime.com/t/french-bulldog-puppy-words-i-love-french-red-heart-white-background-72631476.jpg" class="pet-cover">
+
     <div class="container">
       <img src="../static/images/{{pet.picture}}" class="pet-avi">
       <div class="pet-info">
@@ -46,9 +48,22 @@
 				<li class="tab col s6"><a class="active" href="#fun">Fun</a></li>
 				<li class="tab col s6"><a href="#about">About Me</a></li>
 			</ul>
-			<div id="fun" class="col s12 pet">Fun</div>
+			<div id="fun" class="col s12 pet">
+				{% for pic in pics %}
+					<img src="{{pic.picture}}">
+					<p>{{pic.caption}}</p>
+				{% endfor %}
+			</div>
 			<div id="about" class="col s12 pet">
-				About Me
+				<h5>About Me:</h5>
+				{{pet.description}}
+
+				<h5>Fun Facts:</h5>
+				<p><strong>Nickname:</strong> {{pet.name}}</p>
+				<p><strong>Location:</strong> {{pet.location}}</p>
+				<p><strong>Size:</strong> {{pet.size}}</p>
+				<p><strong>Breed:</strong> {{pet.breed}}</p>
+				<p><strong>Color:</strong> {{pet.color}}</p>
 			</div>
 	      </div>
 	  </div>

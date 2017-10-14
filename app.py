@@ -45,7 +45,8 @@ def adopt():
 @app.route('/pet/<petname>')
 def pet(petname):
 	pet = Pets.query.filter_by(name=petname).first()
-	return render_template('pet.html', pet = pet)
+	pics = Pet_Profile.query.filter_by(name=petname).all()
+	return render_template('pet.html', pet = pet, pics = pics)
 
 # modules below
 # post new user
@@ -113,6 +114,22 @@ class Pets(db.Model):
 
     def __repr__(self):
         return '<Pet %r>' % self.name
+
+class Pet_Profile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
+    picture = db.Column(db.String(300))
+    caption = db.Column(db.String(300))
+    likes = db.Column(db.Integer)
+
+    def __init__(self, name, picture, caption, likes):
+        self.name = name
+        self.picture = picture
+        self.caption = caption
+        self.likes = likes
+
+    def __repr__(self):
+        return '<Park id %r>' % self.id
 
 
 # #LOGIN
