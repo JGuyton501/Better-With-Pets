@@ -66,6 +66,7 @@ def updatePicLikes(picID, likes):
 @app.route('/updateProposalStatus/<proposalID>/<status>', methods=['POST'])
 def updateProposalStatus(proposalID, status):
 	proposal = Pet_Adopt.query.filter_by(id=proposalID).first()
+	Pets.query.filter_by(name=proposal.pet_name).delete()
 	proposal.status = status
 	db.session.commit()
 	return redirect('/admin-main')
