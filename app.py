@@ -79,7 +79,7 @@ def new_user():
 # post new proposal
 @app.route('/new_proposal', methods=['POST'])
 def new_proposal():
-	print (request.form['first_name'],request.form['last_name'],request.form['email'],request.form['phone'],request.form['previous_owner'],request.form['first_time_adopt'],request.form['pet_safe'],request.form['other_pets'],request.form['other_pets_list'],request.form['why_adopt'],request.form['notes'],request.form['pet_name'],request.form['pet_color'],request.form['pet_age'],request.form['pet_picture'])
+	# print (request.form['first_name'],request.form['last_name'],request.form['email'],request.form['phone'],request.form['previous_owner'],request.form['first_time_adopt'],request.form['pet_safe'],request.form['other_pets'],request.form['other_pets_list'],request.form['why_adopt'],request.form['notes'],request.form['pet_name'],request.form['pet_color'],request.form['pet_age'],request.form['pet_picture'])
 	proposal = modules.Pet_Adopt(
         request.form['first_name'],
         request.form['last_name'],
@@ -186,18 +186,19 @@ class Pet_Adopt(db.Model):
     pet_age = db.Column(db.String(15))
     pet_picture = db.Column(db.String(250))
 
+	
     def __init__(
     	self, 
     	first_name, 
     	last_name, 
     	email, 
-    	phone, 
-    	previous_owner, 
-    	first_time_adopt, 
-    	pet_safe, 
-    	other_pets, 
-    	other_pets_list, 
-    	why_adopt, 
+    	phone,
+    	previous_owner,
+    	first_time_adopt,
+    	pet_safe,
+    	other_pets,
+    	other_pets_list,
+    	why_adopt,
     	notes,
     	pet_name,
     	pet_color,
@@ -221,7 +222,7 @@ class Pet_Adopt(db.Model):
         self.pet_picture = pet_picture
 
     def __repr__(self):
-        return '<Proposal id %r>' % self.id
+        return '<Pet %r>' % self.first_name
 
 
 # #LOGIN
