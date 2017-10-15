@@ -44,8 +44,9 @@ def adopt():
 
 @app.route('/admin-main')
 def admin_main():
-	pets = Pets.query.all()
-	return render_template('admin-main.html', pets = pets)
+	new_proposals = Pet_Adopt.query.filter_by(status="new").all()
+	recent_proposals = Pet_Adopt.query.filter_by(status="recent").all()
+	return render_template('admin-main.html', new_proposals = new_proposals, recent_proposals = recent_proposals)
 
 @app.route('/pet/<petname>')
 def pet(petname):
@@ -59,6 +60,21 @@ def updatePicLikes(picID, likes):
 	pic.likes = likes
 	db.session.commit()
 	return "Like Success"
+
+@app.route('/updateProposalStatus/<proposalID>/<status>', methods=['POST'])
+def updateProposalStatus(proposalID, status):
+	proposal = Pet_Adopt.query.filter_by(id=proposalID).first()
+	proposal.status = status
+	db.session.commit()
+	return redirect('/admin-main')
+
+@app.route('/deleteProposal/<proposalID>', methods=['POST'])
+def deleteProposal(proposalID):
+	print(Pet_Adopt.query.filter_by(id=proposalID).first())
+	Pet_Adopt.query.filter_by(id=proposalID).delete()
+	db.session.commit()
+	return redirect('/admin-main')
+
 
 # modules below
 # post new user
@@ -95,7 +111,8 @@ def new_proposal():
         request.form['pet_name'],
         request.form['pet_color'],
         request.form['pet_age'],
-        request.form['pet_picture']
+        request.form['pet_picture'],
+        "new"
         )
 	db.session.add(proposal)
 	db.session.commit()
@@ -185,6 +202,7 @@ class Pet_Adopt(db.Model):
     pet_color = db.Column(db.String(15))
     pet_age = db.Column(db.String(15))
     pet_picture = db.Column(db.String(250))
+    status = db.Column(db.String(10))
 
 	
     def __init__(
@@ -203,7 +221,8 @@ class Pet_Adopt(db.Model):
     	pet_name,
     	pet_color,
     	pet_age,
-    	pet_picture
+    	pet_picture,
+    	status
     ):
         self.first_name = first_name
         self.last_name = last_name
@@ -219,7 +238,8 @@ class Pet_Adopt(db.Model):
         self.pet_name = pet_name
         self.pet_color = pet_color
         self.pet_age = pet_age
-        self.pet_picture = pet_picture
+        self.pet_picture = pet_picture,
+        self.status = status
 
     def __repr__(self):
         return '<Pet %r>' % self.first_name
