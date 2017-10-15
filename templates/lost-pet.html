@@ -154,15 +154,16 @@
     $('select').material_select();
 
     $("#pet_type").on("change", function() {
-    var e = document.getElementById("pet_type");
-    var value = e.options[e.selectedIndex].value;
-    if(value === "Dog") {
-      $(".dog_type").removeClass("hide");
-    }
-    else{
-      $(".dog_type").addClass("hide");
-    }
+      var e = document.getElementById("pet_type");
+      var value = e.options[e.selectedIndex].value;
+      if(value === "Dog") {
+        $(".dog_type").removeClass("hide");
+      }
+      else{
+        $(".dog_type").addClass("hide");
+      }
   
+    });
   });
 
   function updateSpots(id){
