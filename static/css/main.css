@@ -7,7 +7,7 @@ body, html {
 }
 
 .bg {
-    background-image: linear-gradient( rgba(0,0,0,.5), rgba(0,0,0,.7) ), url("../images/land.jpeg");
+    background-image: linear-gradient( rgba(0,0,0,.5), rgba(0,0,0,.7) ), url("../images/land2.jpg");
     height: 100%; 
     background-position: center;
     background-repeat: no-repeat;

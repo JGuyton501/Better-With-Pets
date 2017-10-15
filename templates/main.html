@@ -12,10 +12,13 @@
     <div id="legend"><h5>Legend</h5></div>
     <div class="container">
       
-      <div id="pet-parks" class="row col s12" overflow-x: auto;">
-        
-        <h5 class="center">Parks in the area</h5>
-        {% for park in parks %}
+      <div class="row col s12" overflow-x: auto;" style="padding-top: 20px;">        
+        <ul class="tabs center">
+          <li class="tab col s3"><a class="active" href="#dog-parks">Doggie Parks</a></li>
+          <li class="tab col s3"><a href="#animal-shelters">Animal Shelters</a></li>
+        </ul>
+        <div id="dog-parks" class="col s12">
+          {% for park in parks %}
           <div class="col s3">
             <div class="card">
               <div class="card-image waves-effect waves-block waves-light">
@@ -41,6 +44,35 @@
             </div>
           </div>
         {% endfor %}
+        </div>
+        <div id="animal-shelters" class="col s12">
+          {% for shelter in shelters %}
+          <div class="col s3">
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src="{{shelter.picture}}" width="100%" height="auto">
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">
+                  {{shelter.name}}<i class="material-icons right">more_vert</i>
+                </span>
+                <address>{{shelter.address}}</address>
+                <br/>
+                {% for r in range(shelter.rating|int) %}
+                  <i class="material-icons #c62828 red-text text-darken-2">favorite</i>
+                {% endfor %}
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">
+                  {{shelter.name}}<i class="material-icons right">close</i>
+                </span>
+                <p>Phone: {{shelter.phone}}</p>
+                <p>Description: {{shelter.description}}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        </div>
       </div>
     </div>
 </body>
@@ -58,15 +90,15 @@
                 lng: -90.1994
             }
         });
-        {% for park in parks %}
-          var i{{park.id}} = $.ajax({
-              url: 'https://maps.googleapis.com/maps/api/geocode/json?address={{park.address}}&key=AIzaSyAkOfmfi84Tve-8Q6VW7OmIDfRT-kiVq_0',
+        {% for item in allLocations %}
+          var i{{item.id}} = $.ajax({
+              url: 'https://maps.googleapis.com/maps/api/geocode/json?address={{item.address}}&key=AIzaSyAkOfmfi84Tve-8Q6VW7OmIDfRT-kiVq_0',
               type: 'get',
               success: function () {
-                  lat = i{{park.id}}.responseJSON.results[0]["geometry"]["location"]["lat"];
-                  long = i{{park.id}}.responseJSON.results[0]["geometry"]["location"]["lng"];
+                  lat = i{{item.id}}.responseJSON.results[0]["geometry"]["location"]["lat"];
+                  long = i{{item.id}}.responseJSON.results[0]["geometry"]["location"]["lng"];
                   
-                  if( "{{park.type_of_park}}" === "Dog"){
+                  if( "{{item.type_of_park}}" === "Dog"){
                     var marker = new google.maps.Marker({
                         position: {
                             lat: parseFloat(lat),
@@ -76,7 +108,7 @@
                         map: map
                     });
                   } 
-                  else if ("{{park.type_of_park}}" === "Shelter"){
+                  else if ("{{item.type_of_park}}" === "Shelter"){
                     var marker = new google.maps.Marker({
                         position: {
                             lat: parseFloat(lat),
@@ -88,7 +120,7 @@
                   } 
                   markers.push(marker); //push back into markers array
 
-                  var contentString = '<h5>{{park.name}}</h5> <address>{{park.address}}</address> <p>Phone: {{park.phone}}</p><p>Description: {{park.description}}</p>';
+                  var contentString = '<h5>{{item.name}}</h5> <address>{{item.address}}</address> <p>Phone: {{item.phone}}</p><p>Description: {{item.description}}</p>';
 
                     var infowindow = new google.maps.InfoWindow({
                       content: contentString

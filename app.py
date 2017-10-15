@@ -26,8 +26,10 @@ def signup():
 
 @app.route('/main')
 def main():
-	parks = Parks.query.all()
-	return render_template('main.html', parks = parks)
+	allLocations = Parks.query.all()
+	parks = Parks.query.filter_by(type_of_park="Dog").all()
+	shelters = Parks.query.filter_by(type_of_park="Shelter").all()
+	return render_template('main.html', allLocations = allLocations, parks = parks, shelters = shelters)
 
 @app.route('/social')
 def social():
