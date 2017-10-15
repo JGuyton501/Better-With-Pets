@@ -19,7 +19,7 @@
       <div class="pet-info">
 	      <div class="woof">
 		      <h4>Hi! I'm {{pet.name}}</h4>
-		      <a class="waves-effect waves-light btn blue darken-3 modal-trigger" href="#modal1"" id="adopt">Adopt Me</a>
+		      <a class="waves-effect waves-light btn blue darken-3 modal-trigger" href="#modal1" id="adopt">Adopt Me</a>
 			  <div id="modal1" class="modal">
 				  <div class="modal-content">
 					<h5>Are you fit to bring {{pet.name}} home?</h5>
@@ -115,12 +115,19 @@
 			</ul>
 			<div id="fun" class="col s12 pet row">
 				{% for pic in pics %}
-					<div class="col s3 pet-ind">
+					<div class="col s12 m6 l3 pet-ind">
 						<img class="materialboxed pet-pic" data-caption="{{pic.caption}}" src="{{pic.picture}}" />
 						<div class="pet-pic-item" id="pet-pic-item-{{pic.id}}">
-							<a href="#" onclick="updateLikes({{pic.id}}); return false;"><span class="label" id="pet-pic-likes-{{pic.id}}">{{pic.likes}}</span></a>
+							<a href="#" onclick="updateLikes({{pic.id}}); return false;">
+								<img src="../static/images/like.png" width="30" height="auto">
+							</a>
+							<span class="sm-text"> 
+								<span>Liked by</span>
+								<span id="pet-pic-likes-{{pic.id}}">{{pic.likes}}</span>
+								<span>people</span>
+							</span>
 						</div>
-						<p class="p-caption">{{pic.caption}}</p>
+						<p>{{pic.name}}: {{pic.caption}}</p>
 					</div>
 				{% endfor %}
 			</div>
