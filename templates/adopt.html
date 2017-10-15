@@ -28,7 +28,7 @@
 
       <div class="filter hide">
         <div class="row">
-          <div class="input-field col s4">
+          <div class="input-field col s12 m6 l4">
             <select name="pet_type" id='pet_type'>
               <option value="Any">Any</option>
               <option value="Dog">Dog</option>
@@ -37,7 +37,7 @@
             <label>Pet Type</label>
           </div>
 
-          <div class="input-field col s4 hide dog_type">
+          <div class="input-field col s12 m6 l4 hide dog_type">
             <select name="dog_type" id='dog_type'>
               <option value="Any">Any</option>
               <option value="Schnauzer">Schnauzer</option>
@@ -54,7 +54,7 @@
             <label>Breed</label>
           </div>
 
-          <div class="input-field col s4">
+          <div class="input-field col s12 m6 l4">
             <select name="age_group" id='age_group'>
               <option value="Any">Any</option>
               <option value="Baby">Baby</option>
@@ -65,7 +65,7 @@
             <label>Age</label>
           </div>
 
-          <div class="input-field col s4">
+          <div class="input-field col s12 m6 l4">
             <select name="pet_size" id='pet_size'>
               <option value="Any">Any</option>
               <option value="Small">Small</option>
@@ -76,7 +76,7 @@
             <label>Size</label>
           </div>
 
-          <div class="input-field col s4">
+          <div class="input-field col s12 m6 l4">
             <select name="pet_color" id='pet_color'>
               <option value="Any">Any</option>
               <option value="Golden">Golden</option>
@@ -95,7 +95,7 @@
         <div class="row">
           
           {% for pet in pets %}
-          <div class="col s3">
+          <div class="col s12 m6 l3">
             <div class="card" style="height: 200px">
               <div class="card-image">
                 <a href="/pet/{{pet.name}}"><img src="../static/images/{{pet.picture}}" height="200" width="150"></a>
