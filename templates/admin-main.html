@@ -55,8 +55,8 @@
 									<span class="title">Name: </span>{{proposal.pet_name}}<br>
 									<span class="title">Age: </span>{{proposal.pet_age}}<br>
 									<span class="title">Color: </span>{{proposal.pet_color}}<br>
-									<a class="waves-effect waves-light btn green custom-btn" id="approve_proposal" onclick="updateStatus({{proposal.id}}, 'recent')">Approve</a>
-									<a class="waves-effect waves-light btn red custom-btn" id="delete_proposal" onclick="updateStatus({{proposal.id}}, 'delete')">Delete</a>
+									<a class="waves-effect waves-light btn green custom-btn" id="approve_proposal" onclick="updateStatus({{proposal.id}}, 'recent'); window.location.reload()">Approve</a>
+									<a class="waves-effect waves-light btn red custom-btn" id="delete_proposal" onclick="updateStatus({{proposal.id}}, 'delete'); window.location.reload()">Delete</a>
 
 								</div>
 								<div class="col s9">
@@ -132,10 +132,7 @@
 					</li>
 				</ul>
 			{% endfor %}
-		</div>
-
-      
-      
+		</div> 
     </div>
 </body>
 <script type="text/javascript">
