@@ -117,3 +117,16 @@ body, html {
     background-image: url('../images/map-paw.png');
     background-size: 45px 35px;
 }
+.title{
+    font-size: 15px;
+    font-weight: 600;
+}
+.a-row{
+    margin-bottom: 0px;
+}
+.custom-btn{
+    height: 15px;
+    width: 150px;
+    line-height: 15px;
+    font-size: 12px;
+}
