@@ -150,11 +150,11 @@ def new_proposal():
 	db.session.commit()
 	return redirect('/main')
 
-# post new proposal
+# post new doggie
 @app.route('/new_lost_pet', methods=['POST'])
 def new_lost_pet():
 	# print (request.form['first_name'],request.form['last_name'],request.form['email'],request.form['phone'],request.form['previous_owner'],request.form['first_time_adopt'],request.form['pet_safe'],request.form['other_pets'],request.form['other_pets_list'],request.form['why_adopt'],request.form['notes'],request.form['pet_name'],request.form['pet_color'],request.form['pet_age'],request.form['pet_picture'])
-	proposal = modules.Lost_pet(
+	doggie = modules.Lost_pet(
         request.form['first_name'],
         request.form['last_name'],
         request.form['email'],
@@ -169,9 +169,9 @@ def new_lost_pet():
         "no",
         1
         )
-	db.session.add(proposal)
+	db.session.add(doggie)
 	db.session.commit()
-	return redirect('/main')
+	return redirect('/lost-pet')
 
 
 ##########################CLASSES################
