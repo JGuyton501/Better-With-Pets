@@ -126,14 +126,15 @@
                       <img src="{{lost_pet.picture}}">
                       <span class="card-title black-text">{{lost_pet.name}}</span>
                     </div>
-                    <div class="card-content">
-                        <div class="col s12 m6 l6">
+                    <div class="card-content row">
+                        <div class="col s12 m12 l12">
                             <span class="facts"><strong>Type:</strong> {{lost_pet.type_of_pet}}</span>
                             <span class="facts"><strong>Breed:</strong> {{lost_pet.breed}}</span>
                         </div>
-                        <div class="col s12 m6 l6">
+                        <div class="col s12 m12 l12">
                             <span class="facts"><strong>Color:</strong> {{lost_pet.color}}</span>
                             <span class="facts"><strong>Size:</strong> {{lost_pet.size}}</span>
+                            <br>
                         </div>
                         <div class="col s12 m12 l12">
                             <span>Spotted by </span><span id="pet-spots-{{lost_pet.id}}"><strong>{{lost_pet.spotted}}</strong></span><span> people</span>
