@@ -33,8 +33,8 @@
             </form>
         </div>
 		<ul class="tabs center">
-			<li class="tab col s3"><a class="active" href="#new_proposals">New Proposals</a></li>
-			<li class="tab col s3"><a href="#recent_proposals">Recent Proposals</a></li>
+			<li class="tab col s12 m6 l3"><a class="active" href="#new_proposals">New Proposals</a></li>
+			<li class="tab col s12 m6 l3"><a href="#recent_proposals">Recent Proposals</a></li>
 		</ul>
 		<div id="new_proposals" class="col s12">
 			{% for proposal in new_proposals %}
@@ -42,33 +42,30 @@
 					<li>
 						<div class="collapsible-header">
 							<div class="row a-row">
-								<div class="col s4"><span class="title">Name:</span> {{proposal.first_name}} {{proposal.last_name}}</div>
-								<div class="col s4"><span class="title">Email:</span> {{proposal.email}}</div>
-								<div class="col s4 right-align"><span class="title">Pet Interest:</span> {{proposal.pet_name}}</div>	
+								<div class="col s12 m6 l4"><span class="title">Name:</span> {{proposal.first_name}} {{proposal.last_name}}</div>
+								<div class="col s12 m6 l4"><span class="title">Email:</span> {{proposal.email}}</div>
+								<div class="col s12 m6 l4 right-align"><span class="title">Pet Interest:</span> {{proposal.pet_name}}</div>	
 							</div>
 						</div>
 						<div class="collapsible-body">
 							<div class="col s12 row a-row">
-								<div class="col s3">
+								<div class="col s12 m6 l3">
 									<img src="../static/images{{proposal.pet_picture}}" width="50%" height="auto">
 									<br>
 									<span class="title">Name: </span>{{proposal.pet_name}}<br>
 									<span class="title">Age: </span>{{proposal.pet_age}}<br>
 									<span class="title">Color: </span>{{proposal.pet_color}}<br>
-									<a class="waves-effect waves-light btn green custom-btn" id="approve_proposal" onclick="updateStatus({{proposal.id}}, 'recent'); window.location.reload()">Approve</a>
-									<a class="waves-effect waves-light btn red custom-btn" id="delete_proposal" onclick="updateStatus({{proposal.id}}, 'delete'); window.location.reload()">Delete</a>
-
 								</div>
 								<div class="col s9">
 									<span class="title">Contact Number: </span>{{proposal.phone}}<br>
 									<div class="row a-row">
-										<div class="col s4"><span class="title">First time adopting: </span>{{proposal.first_time_adopt}}</div>
-										<div class="col s4"><span class="title">Previous pet owner: </span>{{proposal.previous_owner}}</div>
-										<div class="col s4"><span class="title">Pet safe home: </span>{{proposal.pet_safe}}</div>
+										<div class="col s12 m6 l4"><span class="title">First time adopting: </span>{{proposal.first_time_adopt}}</div>
+										<div class="col s12 m6 l4"><span class="title">Previous pet owner: </span>{{proposal.previous_owner}}</div>
+										<div class="col s12 m6 l4"><span class="title">Pet safe home: </span>{{proposal.pet_safe}}</div>
 									</div>
 									<div class="row a-row">
-										<div class="col s4"><span class="title">Other pets: </span>{{proposal.other_pets}}</div>
-										<div class="col s8"><span class="title">Other pet breeds: </span>{{proposal.other_pets_list}}</div>
+										<div class="col s12 m6 l4"><span class="title">Other pets: </span>{{proposal.other_pets}}</div>
+										<div class="col s12 m6 l8"><span class="title">Other pet breeds: </span>{{proposal.other_pets_list}}</div>
 									</div>
 									<div class="row a-row">
 										<div class="col s12">
@@ -78,6 +75,9 @@
 											<span class=title>Additional notes:</span> {{proposal.notes}}
 										</div>
 									</div>
+									<br>
+									<a class="waves-effect waves-light btn green custom-btn" id="approve_proposal" onclick="updateStatus({{proposal.id}}, 'recent'); window.location.reload()">Approve</a>
+									<a class="waves-effect waves-light btn red custom-btn" id="delete_proposal" onclick="updateStatus({{proposal.id}}, 'delete'); window.location.reload()">Delete</a>
 								</div>
 							</div>
 						</div>
@@ -91,32 +91,30 @@
 					<li>
 						<div class="collapsible-header">
 							<div class="row a-row">
-								<div class="col s4"><span class="title">Name:</span> {{proposal.first_name}} {{proposal.last_name}}</div>
-								<div class="col s4"><span class="title">Email:</span> {{proposal.email}}</div>
-								<div class="col s4 right-align"><span class="title">Pet Interest:</span> {{proposal.pet_name}}</div>	
+								<div class="col s12 m6 l4"><span class="title">Name:</span> {{proposal.first_name}} {{proposal.last_name}}</div>
+								<div class="col s12 m6 l4"><span class="title">Email:</span> {{proposal.email}}</div>
+								<div class="col s12 m6 l4 right-align"><span class="title">Pet Interest:</span> {{proposal.pet_name}}</div>	
 							</div>
 						</div>
 						<div class="collapsible-body">
 							<div class="col s12 row a-row">
-								<div class="col s3">
+								<div class="col s12 m6 l3">
 									<img src="../static/images{{proposal.pet_picture}}" width="50%" height="auto">
 									<br>
 									<span class="title">Name: </span>{{proposal.pet_name}}<br>
 									<span class="title">Age: </span>{{proposal.pet_age}}<br>
 									<span class="title">Color: </span>{{proposal.pet_color}}<br>
-									<a class="waves-effect waves-light btn red custom-btn" id="delete_proposal" onclick="updateStatus({{proposal.id}}, 'delete')">Delete</a>
-
 								</div>
 								<div class="col s9">
 									<span class="title">Contact Number: </span>{{proposal.phone}}<br>
 									<div class="row a-row">
-										<div class="col s4"><span class="title">First time adopting: </span>{{proposal.first_time_adopt}}</div>
-										<div class="col s4"><span class="title">Previous pet owner: </span>{{proposal.previous_owner}}</div>
-										<div class="col s4"><span class="title">Pet safe home: </span>{{proposal.pet_safe}}</div>
+										<div class="col s12 m6 l4"><span class="title">First time adopting: </span>{{proposal.first_time_adopt}}</div>
+										<div class="col s12 m6 l4"><span class="title">Previous pet owner: </span>{{proposal.previous_owner}}</div>
+										<div class="col s12 m6 l4"><span class="title">Pet safe home: </span>{{proposal.pet_safe}}</div>
 									</div>
 									<div class="row a-row">
-										<div class="col s4"><span class="title">Other pets: </span>{{proposal.other_pets}}</div>
-										<div class="col s8"><span class="title">Other pet breeds: </span>{{proposal.other_pets_list}}</div>
+										<div class="col s12 m6 l4"><span class="title">Other pets: </span>{{proposal.other_pets}}</div>
+										<div class="col s12 m6 l8"><span class="title">Other pet breeds: </span>{{proposal.other_pets_list}}</div>
 									</div>
 									<div class="row a-row">
 										<div class="col s12">
@@ -126,6 +124,8 @@
 											<span class=title>Additional notes:</span> {{proposal.notes}}
 										</div>
 									</div>
+									<br>
+									<a class="waves-effect waves-light btn red custom-btn" id="delete_proposal" onclick="updateStatus({{proposal.id}}, 'delete')">Delete</a>
 								</div>
 							</div>
 						</div>
