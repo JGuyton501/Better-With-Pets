@@ -1,6 +1,7 @@
 <nav class="#616161 grey darken-2">
     <div class="nav-wrapper">
         <a href="/main" class="brand-logo" style="padding-top: 10px;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Purina-logo.svg/2000px-Purina-logo.svg.png" width="200" height="auto"></a>
+        <a href="#" data-activates="mobile-menu" class="button-collapse right"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="/admin-main">Proposals</a></li>
             <li><a href="/">Logout</a></li>
@@ -9,3 +10,17 @@
 </nav>
 
 
+<ul class="side-nav" id="mobile-menu">
+    <li><a href="/admin-main">Proposals</a></li>
+    <li><a href="/">Logout</a></li>
+</ul>
+
+
+<script type="text/javascript">
+     $(document).ready(function () {
+        $(".button-collapse").sideNav({
+            closeOnClick: true,
+            edge: 'right',
+        });
+    });
+</script>

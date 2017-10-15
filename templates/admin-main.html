@@ -4,22 +4,6 @@
   {% include 'link.html' %}
   <title>BWP Hack Social</title>
   {% include 'admin-nav.html' %}
-
-  <style type="text/css">
-  	.title{
-  		font-size: 15px;
-  		font-weight: 600;
-  	}
-  	.a-row{
-  		margin-bottom: 0px;
-  	}
-  	.custom-btn{
-  		height: 15px;
-  		width: 150px;
-  		line-height: 15px;
-  		font-size: 12px;
-  	}
-  </style>
 </head>
 <body>
     <div class="container">
@@ -125,7 +109,7 @@
 										</div>
 									</div>
 									<br>
-									<a class="waves-effect waves-light btn red custom-btn" id="delete_proposal" onclick="updateStatus({{proposal.id}}, 'delete')">Delete</a>
+									<a class="waves-effect waves-light btn red custom-btn" id="delete_proposal" onclick="updateStatus({{proposal.id}}, 'delete'); window.location.reload()">Delete</a>
 								</div>
 							</div>
 						</div>
