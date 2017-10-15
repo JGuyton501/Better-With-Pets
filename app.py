@@ -150,17 +150,19 @@ class Pets(db.Model):
     breed = db.Column(db.String(50))
     age = db.Column(db.String(15))
     picture = db.Column(db.String(300))
+    banner = db.Column(db.String(300))
     size = db.Column(db.String(15))
     color = db.Column(db.String(15))
     description = db.Column(db.String(1000))
     location = db.Column(db.String(100))
 
-    def __init__(self, type_of_pet, name, breed, age, picture, size, color, description, location):
+    def __init__(self, type_of_pet, name, breed, age, picture, banner, size, color, description, location):
         self.type_of_pet = type_of_pet
         self.name = name
         self.breed = breed
         self.age = age
         self.picture = picture
+        self.banner = banner
         self.size = size
         self.color = color
         self.description = description
