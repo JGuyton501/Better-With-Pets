@@ -62,7 +62,7 @@ body, html {
 .pet-pic-item {
     width: 45px;
     height: 45px;
-    background-image: url('../static/images/like.png');
+    background-image: url('../images/like.png');
     position: relative;
     top: -50px;
     left: 210px;
@@ -81,6 +81,6 @@ body, html {
     top: -15%;
 }
 #adopt{
-    background-image: url('../static/images/map-paw.png');
+    background-image: url('../images/map-paw.png');
     background-size: 45px 35px;
 }
