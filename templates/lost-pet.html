@@ -60,7 +60,7 @@
                             </div>
 
                             <div class="input-field col s12 m6 l4 hide breed">
-                                <select name="breed" id='breed'>
+                                <select name="breed" id='pet_type'>
                                     <option value="Any">Any</option>
                                     <option value="Schnauzer">Schnauzer</option>
                                     <option value="Shih-Txu">Shih Txu</option>
@@ -151,7 +151,19 @@
   $(document).ready(function() {
     $('.modal').modal();
     $('select').material_select();
+
+    $("#pet_type").on("change", function() {
+    var e = document.getElementById("pet_type");
+    var value = e.options[e.selectedIndex].value;
+    if(value === "Dog") {
+      $(".dog_type").removeClass("hide");
+    }
+    else{
+      $(".dog_type").addClass("hide");
+    }
+  
   });
+
   function updateSpots(id){
     var curr_spots = parseInt($("#pet-spots-"+id).text()) + 1;
     $("#pet-spots-"+id).text(curr_spots);
