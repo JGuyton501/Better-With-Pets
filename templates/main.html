@@ -13,13 +13,13 @@
         <h5>Legend</h5></div>
     <div class="container" style="padding-top: 20px;">
         <ul class="tabs center">
-            <li class="tab col s3"><a class="active" href="#dog-parks">Doggie Parks</a></li>
-            <li class="tab col s3"><a href="#animal-shelters">Animal Shelters</a></li>
+            <li class="tab col s12 m6 l3"><a class="active" href="#dog-parks">Doggie Parks</a></li>
+            <li class="tab col s12 m6 l3"><a href="#animal-shelters">Animal Shelters</a></li>
         </ul>
         <div class="row col s12" overflow-x: auto;>
             <div id="dog-parks" class="col s12">
                 {% for park in parks %}
-                <div class="col s3">
+                <div class="col s12 m6 l3">
                     <div class="card">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img class="activator" src="{{park.picture}}" width="100%" height="auto">
@@ -27,8 +27,12 @@
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4">{{park.name}}<i class="material-icons right">more_vert</i></span>
                             <address>{{park.address}}</address>
-                            <br/> {% for r in range(park.rating|int) %}
-                            <i class="material-icons #c62828 red-text text-darken-2">favorite</i> {% endfor %}
+                            <br/> 
+                            <div class="">
+                                {% for r in range(park.rating|int) %}
+                                <spam><i class="material-icons #c62828 red-text text-darken-2">favorite</i></spam>
+                                {% endfor %}
+                            </div>
                         </div>
                         <div class="card-reveal">
                             <span class="card-title grey-text text-darken-4">{{park.name}}<i class="material-icons right">close</i></span>
@@ -41,7 +45,7 @@
             </div>
             <div id="animal-shelters" class="col s12">
                 {% for shelter in shelters %}
-                <div class="col s3">
+                <div class="col s12 m6 l3">
                     <div class="card">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img class="activator" src="{{shelter.picture}}" width="100%" height="auto">
