@@ -37,7 +37,8 @@ def social():
 
 @app.route('/lost-pet')
 def lost_pet():
-    return render_template('lost-pet.html')
+	lost_pets = Lost_pet.query.all()
+	return render_template('lost-pet.html', lost_pets = lost_pets)
 
 @app.route('/adopt')
 def adopt():
@@ -73,11 +74,39 @@ def updateProposalStatus(proposalID, status):
 
 @app.route('/deleteProposal/<proposalID>', methods=['POST'])
 def deleteProposal(proposalID):
-	print(Pet_Adopt.query.filter_by(id=proposalID).first())
 	Pet_Adopt.query.filter_by(id=proposalID).delete()
 	db.session.commit()
 	return redirect('/admin-main')
 
+@app.route('/lost_found_pet/<lostID>', methods=['POST'])
+def lost_found_pet(lostID):
+	found = Lost_pet.query.filter_by(id=lostID).first()
+	pet = modules.Found_pet(
+		found.first_name,
+		found.last_name,
+		found.email,
+		found.phone,
+		found.type_of_pet,
+		found.name,
+		found.breed, 
+		found.picture,
+		found.size,
+		found.color,
+		found.location,
+		found.found,
+		found.spotted
+	)
+	db.session.add(pet)
+	Lost_pet.query.filter_by(id=lostID).delete()
+	db.session.commit()
+	return redirect('/admin-main')
+
+@app.route('/updateSpots/<lostID>/<spots>', methods=['POST'])
+def updateSpots(lostID, spots):
+	doggie = Lost_pet.query.filter_by(id=lostID).first()
+	doggie.spotted = spots
+	db.session.commit()
+	return "Like Success"
 
 # modules below
 # post new user
@@ -125,7 +154,11 @@ def new_proposal():
 @app.route('/new_lost_pet', methods=['POST'])
 def new_lost_pet():
 	# print (request.form['first_name'],request.form['last_name'],request.form['email'],request.form['phone'],request.form['previous_owner'],request.form['first_time_adopt'],request.form['pet_safe'],request.form['other_pets'],request.form['other_pets_list'],request.form['why_adopt'],request.form['notes'],request.form['pet_name'],request.form['pet_color'],request.form['pet_age'],request.form['pet_picture'])
-	proposal = modules.Pet_Adopt(
+	proposal = modules.Lost_pet(
+        request.form['first_name'],
+        request.form['last_name'],
+        request.form['email'],
+        request.form['phone'],
         request.form['type_of_pet'],
         request.form['name'],
         request.form['breed'],
@@ -270,6 +303,10 @@ class Pet_Adopt(db.Model):
 
 class Lost_pet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(20))
+    last_name = db.Column(db.String(20))
+    email = db.Column(db.String(75))
+    phone = db.Column(db.String(15))
     type_of_pet = db.Column(db.String(20))
     name = db.Column(db.String(50))
     breed = db.Column(db.String(50))
@@ -280,7 +317,73 @@ class Lost_pet(db.Model):
     found = db.Column(db.String(5))
     spotted = db.Column(db.Integer)
 
-    def __init__(self, type_of_pet, name, breed, picture, size, color, location, found, spotted):
+    def __init__(
+    	self,
+    	first_name, 
+    	last_name, 
+    	email, phone, 
+    	type_of_pet, 
+    	name, 
+    	breed, 
+    	picture, 
+    	size, 
+    	color, 
+    	location, 
+    	found, 
+    	spotted
+    ):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.phone = phone
+        self.type_of_pet = type_of_pet
+        self.name = name
+        self.breed = breed
+        self.picture = picture
+        self.size = size
+        self.color = color
+        self.location = location
+        self.found = found
+        self.spotted = spotted
+
+    def __repr__(self):
+        return '<Pet %r>' % self.name
+
+class Found_pet(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(20))
+    last_name = db.Column(db.String(20))
+    email = db.Column(db.String(75))
+    phone = db.Column(db.String(15))
+    type_of_pet = db.Column(db.String(20))
+    name = db.Column(db.String(50))
+    breed = db.Column(db.String(50))
+    picture = db.Column(db.String(300))
+    size = db.Column(db.String(15))
+    color = db.Column(db.String(15))
+    location = db.Column(db.String(100))
+    found = db.Column(db.String(5))
+    spotted = db.Column(db.Integer)
+
+    def __init__(
+    	self,
+    	first_name, 
+    	last_name, 
+    	email, phone, 
+    	type_of_pet, 
+    	name, 
+    	breed, 
+    	picture, 
+    	size, 
+    	color, 
+    	location, 
+    	found, 
+    	spotted
+    ):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.phone = phone
         self.type_of_pet = type_of_pet
         self.name = name
         self.breed = breed

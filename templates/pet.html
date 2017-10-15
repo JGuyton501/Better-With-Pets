@@ -145,22 +145,20 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
-	// the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-	$('.modal').modal();
-	$('select').material_select();
+		// the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+		$('.modal').modal();
+		$('select').material_select();
 
-	$("#other_pets").on("change", function() {
-    var e = document.getElementById("other_pets");
-    var value = e.options[e.selectedIndex].value;
-    if(value === "yes") {
-      $(".other_pets_list").removeClass("hide");
-    }
-    else{
-      $(".other_pets_list").addClass("hide");
-    }
-  });
-
-
+		$("#other_pets").on("change", function() {
+	    var e = document.getElementById("other_pets");
+	    var value = e.options[e.selectedIndex].value;
+	    if(value === "yes") {
+	      $(".other_pets_list").removeClass("hide");
+	    }
+	    else{
+	      $(".other_pets_list").addClass("hide");
+	    }
+	  });
 	});
       
 	function updateLikes(id){

@@ -1,18 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  {% include 'link.html' %}
-  <title>BWP Hack Lost Pet</title>
-  {% include 'nav.html' %}
 
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="../static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="../static/css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<head>
+    {% include 'link.html' %}
+    <title>BWP Hack Lost Pet</title>
+    {% include 'nav.html' %}
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="../static/css/main.css" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
+
 <body>
     <div class="container">
-      ljk
+        <div class="lost-btn">
+            <a class="waves-effect waves-light btn blue darken-3 modal-trigger" href="#lost-animal-modal" style="width: 100%">Report a lost pet or spotted lost pet</a>
+            <div id="lost-animal-modal" class="modal">
+                <div class="modal-content">
+                    <h5>Lets work together to find the lost pet's owner.</h5>
+                    <p>Please fill out the following information to notify the community of the lost pet.</p>
+                    <form method="post" action="/new_lost_pet">
+                        <p><strong>Your information:</strong></p>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="first_name" name="first_name" type="text" class="validate" required>
+                                <label for="first_name">First Name</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="last_name" name="last_name" type="text" class="validate" required>
+                                <label for="last_name">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="email" name="email" type="email" class="validate" required>
+                                <label for="email">Email Address</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="phone" name="phone" type="text" class="validate" required>
+                                <label for="phone">Phone Number</label>
+                            </div>
+                        </div>
+                        <p><strong>Pet information:</strong></p>
+                        <div class="row">
+                            <div class="input-field col s12 m12 l12">
+                                <input id="name" name="name" type="text" class="validate" required>
+                                <label for="name">Pet Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6 l4">
+                                <select name="type_of_pet" id='type_of_pet'>
+                                    <option value="Any">Any</option>
+                                    <option value="Dog">Dog</option>
+                                    <option value="Cat">Cat</option>
+                                </select>
+                                <label>Pet Type</label>
+                            </div>
+
+                            <div class="input-field col s12 m6 l4 hide breed">
+                                <select name="breed" id='breed'>
+                                    <option value="Any">Any</option>
+                                    <option value="Schnauzer">Schnauzer</option>
+                                    <option value="Shih-Txu">Shih Txu</option>
+                                    <option value="Poodle">Poodle</option>
+                                    <option value="Golden-Retriever">Golden Retriever</option>
+                                    <option value="Yorkie">Yorkie</option>
+                                    <option value="Pitbull">Pitbull</option>
+                                    <option value="Husky">Husky</option>
+                                    <option value="Beagle">Beagle</option>
+                                    <option value="Boxer">Boxer</option>
+                                    <option value="Hound">Hound</option>
+                                </select>
+                                <label>Breed</label>
+                            </div>
+                            <div class="input-field col s12 m6 l4">
+                                <select name="size" id='size'>
+                                    <option value="Any">Any</option>
+                                    <option value="Small">Small</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Large">Large</option>
+                                    <option value="X-Large">Extra Large</option>
+                                </select>
+                                <label>Size</label>
+                            </div>
+
+                            <div class="input-field col s12 m6 l4">
+                                <select name="color" id='color'>
+                                    <option value="Any">Any</option>
+                                    <option value="Golden">Golden</option>
+                                    <option value="Black">Black</option>
+                                    <option value="Tan">Tan</option>
+                                    <option value="White">White</option>
+                                    <option value="Silver">Silver</option>
+                                </select>
+                                <label>Color</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s12 m12 l12">
+                                <input id="location" name="location" type="text" class="validate" required>
+                                <label for="location">Where was the pet last seen?</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s12 m12 l12">
+                                <input id="picture" name="picture" type="text" class="validate" required>
+                                <label for="picture">Picture address</label>
+                          </div>
+                        </div>
+                        <div class="card-action right-align">
+                            <input type="submit" class="btn waves-effect waves-light blue darken-3" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+          {% for lost_pet in lost_pets %}
+            <div class="col s12 m6 l4">
+                <div class="card">
+                    <div class="card-image">
+                      <img src="{{lost_pet.picture}}">
+                      <span class="card-title black-text">{{lost_pet.name}}</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="col s12 m6 l6">
+                            <span class="facts"><strong>Type:</strong> {{lost_pet.type_of_pet}}</span>
+                            <span class="facts"><strong>Breed:</strong> {{lost_pet.breed}}</span>
+                        </div>
+                        <div class="col s12 m6 l6">
+                            <span class="facts"><strong>Color:</strong> {{lost_pet.color}}</span>
+                            <span class="facts"><strong>Size:</strong> {{lost_pet.size}}</span>
+                        </div>
+                        <div class="col s12 m12 l12">
+                            <span>Spotted by </span><span id="pet-spots-{{lost_pet.id}}"><strong>{{lost_pet.spotted}}</strong></span><span> people</span>
+                        </div>
+                        <a class="waves-effect waves-light btn blue darken-3" href="#" onclick="updateSpots({{lost_pet.id}}); return false;" id="spotted" style="width: 100%">Spotted</a>
+                        <a class="waves-effect waves-light btn blue darken-3" onclick="updateFoundPet({{lost_pet.id}}); window.location.reload()" style="width: 100%">Found</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </body>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.modal').modal();
+    $('select').material_select();
+  });
+  function updateSpots(id){
+    var curr_spots = parseInt($("#pet-spots-"+id).text()) + 1;
+    $("#pet-spots-"+id).text(curr_spots);
+
+    $.ajax({
+            url: '/updateSpots/' + String(id) + "/"+ String(curr_spots),
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            },   
+        });
+  }
+  function updateFoundPet(id){
+      $.ajax({
+              url: '/lost_found_pet/' + String(id),
+              type: 'POST',
+              success: function(response) {
+                  console.log(response);
+              },
+              error: function(error) {
+                  console.log(error);
+              },   
+          });
+  }
+</script>
+
 </html>
