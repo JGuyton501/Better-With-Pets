@@ -26,9 +26,9 @@ def signup():
 
 @app.route('/main')
 def main():
-	allLocations = Parks.query.all()
-	parks = Parks.query.filter_by(type_of_park="Dog").all()
-	shelters = Parks.query.filter_by(type_of_park="Shelter").all()
+	allLocations = modules.Parks.query.all()
+	parks = modules.Parks.query.filter_by(type_of_park="Dog").all()
+	shelters = modules.Parks.query.filter_by(type_of_park="Shelter").all()
 	return render_template('main.html', allLocations = allLocations, parks = parks, shelters = shelters)
 
 @app.route('/social')
@@ -37,50 +37,50 @@ def social():
 
 @app.route('/lost-pet')
 def lost_pet():
-	lost_pets = Lost_pet.query.all()
+	lost_pets = modules.Lost_pet.query.all()
 	return render_template('lost-pet.html', lost_pets = lost_pets)
 
 @app.route('/adopt')
 def adopt():
-	pets = Pets.query.all()
+	pets = modules.Pets.query.all()
 	return render_template('adopt.html', pets = pets)
 
 @app.route('/admin-main')
 def admin_main():
-	new_proposals = Pet_Adopt.query.filter_by(status="new").all()
-	recent_proposals = Pet_Adopt.query.filter_by(status="recent").all()
+	new_proposals = modules.Pet_Adopt.query.filter_by(status="new").all()
+	recent_proposals = modules.Pet_Adopt.query.filter_by(status="recent").all()
 	return render_template('admin-main.html', new_proposals = new_proposals, recent_proposals = recent_proposals)
 
 @app.route('/pet/<petname>')
 def pet(petname):
-	pet = Pets.query.filter_by(name=petname).first()
-	pics = Pet_Profile.query.filter_by(name=petname).order_by("id asc").all()
+	pet = modules.Pets.query.filter_by(name=petname).first()
+	pics = modules.Pet_Profile.query.filter_by(name=petname).order_by("id asc").all()
 	return render_template('pet.html', pet = pet, pics = pics)
 
 @app.route('/updatePicLikes/<picID>/<likes>', methods=['POST'])
 def updatePicLikes(picID, likes):
-	pic = Pet_Profile.query.filter_by(id=picID).first()
+	pic = modules.Pet_Profile.query.filter_by(id=picID).first()
 	pic.likes = likes
 	db.session.commit()
 	return "Like Success"
 
 @app.route('/updateProposalStatus/<proposalID>/<status>', methods=['POST'])
 def updateProposalStatus(proposalID, status):
-	proposal = Pet_Adopt.query.filter_by(id=proposalID).first()
-	Pets.query.filter_by(name=proposal.pet_name).delete()
+	proposal = modules.Pet_Adopt.query.filter_by(id=proposalID).first()
+	modules.Pets.query.filter_by(name=proposal.pet_name).delete()
 	proposal.status = status
 	db.session.commit()
 	return redirect('/admin-main')
 
 @app.route('/deleteProposal/<proposalID>', methods=['POST'])
 def deleteProposal(proposalID):
-	Pet_Adopt.query.filter_by(id=proposalID).delete()
+	modules.Pet_Adopt.query.filter_by(id=proposalID).delete()
 	db.session.commit()
 	return redirect('/admin-main')
 
 @app.route('/lost_found_pet/<lostID>', methods=['POST'])
 def lost_found_pet(lostID):
-	found = Lost_pet.query.filter_by(id=lostID).first()
+	found = modules.Lost_pet.query.filter_by(id=lostID).first()
 	pet = modules.Found_pet(
 		found.first_name,
 		found.last_name,
@@ -97,13 +97,13 @@ def lost_found_pet(lostID):
 		found.spotted
 	)
 	db.session.add(pet)
-	Lost_pet.query.filter_by(id=lostID).delete()
+	modules.Lost_pet.query.filter_by(id=lostID).delete()
 	db.session.commit()
 	return redirect('/admin-main')
 
 @app.route('/updateSpots/<lostID>/<spots>', methods=['POST'])
 def updateSpots(lostID, spots):
-	doggie = Lost_pet.query.filter_by(id=lostID).first()
+	doggie = modules.Lost_pet.query.filter_by(id=lostID).first()
 	doggie.spotted = spots
 	db.session.commit()
 	return "Like Success"
