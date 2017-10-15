@@ -121,6 +121,25 @@ def new_proposal():
 	db.session.commit()
 	return redirect('/main')
 
+# post new proposal
+@app.route('/new_lost_pet', methods=['POST'])
+def new_lost_pet():
+	# print (request.form['first_name'],request.form['last_name'],request.form['email'],request.form['phone'],request.form['previous_owner'],request.form['first_time_adopt'],request.form['pet_safe'],request.form['other_pets'],request.form['other_pets_list'],request.form['why_adopt'],request.form['notes'],request.form['pet_name'],request.form['pet_color'],request.form['pet_age'],request.form['pet_picture'])
+	proposal = modules.Pet_Adopt(
+        request.form['type_of_pet'],
+        request.form['name'],
+        request.form['breed'],
+        request.form['picture'],
+        request.form['size'],
+        request.form['color'],
+        request.form['location'],
+        "no",
+        1
+        )
+	db.session.add(proposal)
+	db.session.commit()
+	return redirect('/main')
+
 
 ##########################CLASSES################
 # adding park
@@ -249,6 +268,31 @@ class Pet_Adopt(db.Model):
     def __repr__(self):
         return '<Pet %r>' % self.first_name
 
+class Lost_pet(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type_of_pet = db.Column(db.String(20))
+    name = db.Column(db.String(50))
+    breed = db.Column(db.String(50))
+    picture = db.Column(db.String(300))
+    size = db.Column(db.String(15))
+    color = db.Column(db.String(15))
+    location = db.Column(db.String(100))
+    found = db.Column(db.String(5))
+    spotted = db.Column(db.Integer)
+
+    def __init__(self, type_of_pet, name, breed, picture, size, color, location, found, spotted):
+        self.type_of_pet = type_of_pet
+        self.name = name
+        self.breed = breed
+        self.picture = picture
+        self.size = size
+        self.color = color
+        self.location = location
+        self.found = found
+        self.spotted = spotted
+
+    def __repr__(self):
+        return '<Pet %r>' % self.name
 
 # #LOGIN
 # @app.route('/post_login', methods=['POST'])
